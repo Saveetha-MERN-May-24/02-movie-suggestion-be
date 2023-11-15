@@ -15,7 +15,7 @@ const getAllMovies = async(request,response) =>{
     }
     catch(error)
     {
-        response.status(500).json({ErrorMessage:error.message})
+        response.status(500).json({message:error.message})
     }
 }
 
@@ -25,7 +25,7 @@ const addMovie = async(request, response) => {
         const existingMovie = await movieModal.findOne({movieName:movieName})
         if (existingMovie)
         {
-            return response.status(409).json({ErrorMessage:'Movie Name already exists.'})
+            return response.status(409).json({message:'Movie Name already exists.'})
         }
 
         const newMovieData = {
@@ -37,11 +37,11 @@ const addMovie = async(request, response) => {
         }
 
         const newMovie = await movieModal.insertMany(newMovieData)
-        response.status(200).json(newMovie)
+        response.status(200).json(newMovie[0])
     }
     catch(error)
     {
-        response.status(500).json({ErrorMessage:error.message})
+        response.status(500).json({message:error.message})
     }
 }
 
@@ -64,7 +64,7 @@ const suggestMovie = async(request, response) => {
     }
     catch(error)
     {
-        response.status(500).json({ErrorMessage:error.message})
+        response.status(500).json({message:error.message})
     }
 }
 
